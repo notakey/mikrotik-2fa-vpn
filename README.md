@@ -54,7 +54,7 @@ for iOS or Android in various MikroTik workflows, mainly targeted for VPN strong
 
 ## Dependencies:
 
-* JParseFunctions [https://github.com/Winand/mikrotik-json-parser/blob/master/JParseFunctions]
+* JParseFunctions [https://github.com/Winand/mikrotik-json-parser]
 * Hosted or on-premises Notakey Authentication Appliance installation
 * iOS or Android device with onboarded service
 * Username in onboarded service must match the one used for VPN authentication
