@@ -1,7 +1,7 @@
-# Mikrotik client library for Notakey two factor authentication
+# MikroTik client library for Notakey two factor authentication
 
 Allows to integrate push notification based two factor authentication based on Notakey Authenticator mobile app
-for iOS or Android in various Mikrotik workflows, mainly targeted for VPN authentication.
+for iOS or Android in various MikroTik workflows, mainly targeted for VPN strong authentication.
 
 ## Installation
 
@@ -58,6 +58,7 @@ for iOS or Android in various Mikrotik workflows, mainly targeted for VPN authen
 * Hosted or on-premises Notakey Authentication Appliance installation
 * iOS or Android device with onboarded service
 * Username in onboarded service must match the one used for VPN authentication
+* Fairly modern RouterOS >= 6.43.x
 
 ## Links
 
