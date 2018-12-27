@@ -64,4 +64,4 @@ for iOS or Android in various MikroTik workflows, mainly targeted for VPN strong
 
 * Documentation [http://docs.notakey.com/]
 * Contact [https://notakey.com/]
-* Support [Support@notakey.com]
+* Support [support@notakey.com]
