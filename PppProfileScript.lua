@@ -39,7 +39,7 @@
     } else={
         :put "2FA check failed (due to expiry or denied)";
         # We have an unsuccessful authentication attempt. It is possible that someone has your VPN password!
-        /tool e-mail send to="29553020@sms.local" subject="VPN 2FA authentication failure for user $user from IP $callerId";
+        /tool e-mail send to="noc@example.com" subject="VPN 2FA authentication failure for user $user from IP $callerId";
     }
 
     $NtkUnload
