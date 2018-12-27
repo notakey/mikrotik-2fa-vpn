@@ -1,7 +1,9 @@
 # MikroTik client library for Notakey two factor authentication
 
 Allows to integrate push notification based two factor authentication based on Notakey Authenticator mobile app
-for iOS or Android in various MikroTik workflows, mainly targeted for VPN strong authentication.
+for iOS or Android in various MikroTik workflows, mainly targeted for VPN strong authentication. Note that you will need
+additional firewall or routing setup to use this solution to approve authentication from the same device as the VPN
+is initiated on, e.g. start vpn and approve from the same device.
 
 ## Installation
 
