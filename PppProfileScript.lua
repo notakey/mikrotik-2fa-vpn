@@ -1,6 +1,5 @@
 # OnUp script
 {
-    :local user "iasmanis"
     :local localAddr $"local-address";
     :local remoteAddr $"remote-address";
     :local callerId $"caller-id";
