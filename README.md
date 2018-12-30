@@ -4,8 +4,7 @@ Allows to integrate push notification based two factor authentication using Nota
 for iOS or Android in various MikroTik workflows, mainly targeted for VPN strong authentication.
 
 Note that you will need additional firewall or routing setup to use this solution to approve authentication
-from the same device as the VPN
-is initiated on, e.g. start vpn and approve from the same device.
+from the same device as the VPN is initiated on, e.g. start vpn and approve from the same device.
 
 ## Installation
 
@@ -63,6 +62,12 @@ is initiated on, e.g. start vpn and approve from the same device.
 * iOS or Android device with onboarded service
 * Username in onboarded service must match the one used for VPN authentication
 * Fairly modern RouterOS >= v6.2
+
+## Limitations
+
+* Due to limitations of JParseFunctions library, you cannot use parentheses and possibly other special punctuation in authentication requests
+* Currently you also cannot have multiple spaces in authentication request text fields (action and description)
+* AuthRequest expiration will ba addred in later releases
 
 ## Links
 
