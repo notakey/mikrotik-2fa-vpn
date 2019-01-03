@@ -38,6 +38,13 @@ if (!any $NtkAuthRequest) do={ :global NtkAuthRequest do={
         }
 
         :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/application_user/$authUser/auth_request" http-content-type="application/json" http-method=post  http-data="{\"action\": \"$lauthTitle\", \"description\": \"$lauthDesc\"}" as-value output=user];
+
+        :if ($result->"status" != "finished") do={
+            :log error "NotakeyFunctions: Notakey auth request creation request failed";
+            :put "ERROR Notakey auth request creation request failed";
+            :error "ERROR Notakey auth request creation request failed";
+        }
+
         :set content ($result->"data");
         :set uuid ([$JSONLoads $content]->"uuid");
         # Clear payload contents
