@@ -15,7 +15,7 @@
 
     :if ([$NtkWaitFor uuid=$ntkAuthUuid host=$ntkHost accessId=$ntkAccessId]) do={
         :put "All cool, we are letting you in";
-    }else{
+    } else={
         :put "Auth expired or denied"
     }
 
