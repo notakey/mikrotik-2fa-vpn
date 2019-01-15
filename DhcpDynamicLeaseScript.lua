@@ -38,7 +38,7 @@
             :local authDescMsg "Allow access to for $hostName with MAC $leaseActMAC and IP $leaseActIP\?";
             :local authTitleMsg "New DHCP client"
 
-            :local ntkAuthUuid ([$NtkAuthRequest host=$ntkHost accessId=$ntkAccessId authUser=$ntkUser authTitle=$authTitleMsg authDesc=$authDescMsg]);
+            :local ntkAuthUuid ([$NtkAuthRequest host=$ntkHost accessId=$ntkAccessId authUser=$ntkUser authTitle=$authTitleMsg authDesc=$authDescMsg authTtl=7200]);
 
             :if ([$NtkWaitFor uuid=$ntkAuthUuid host=$ntkHost accessId=$ntkAccessId]) do={
                 # Remove blocking rule after successful 2FA autehntication
