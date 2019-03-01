@@ -69,7 +69,6 @@ This script can be copied into MikroTik Terminal shell to test the functionality
 
 * Due to limitations of JParseFunctions library, you cannot use parentheses and possibly other special punctuation in authentication requests
 * Currently you also cannot have multiple consecutive spaces in authentication request text fields (action and description)
-* AuthRequest expiration will ba addred in later releases
 
 ## Links
 
