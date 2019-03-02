@@ -29,6 +29,7 @@ if (!any $NtkAuthRequest) do={ :global NtkAuthRequest do={
         :local lauthTitle $authTitle;
         :local lauthDesc $authDesc;
         :local lauthTtl $authTtl;
+        :local lauthFingerprint $authFingerprint;
 
         :if ([:len $lauthDesc] = 0) do={
             :set lauthDesc "Do you wish to proceed with authentication as user $authUser?";
@@ -38,11 +39,15 @@ if (!any $NtkAuthRequest) do={ :global NtkAuthRequest do={
             :set lauthTitle "MikroTik Authentication";
         }
 
+        :if ([:len $lauthFingerprint] = 0) do={
+            :set lauthFingerprint $lauthDesc;
+        }
+
         :if ([:len $lauthTtl] = 0) do={
             :set lauthTtl 300;
         }
 
-        :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/application_user/$authUser/auth_request" http-content-type="application/json" http-method=post  http-data="{\"action\": \"$lauthTitle\", \"description\": \"$lauthDesc\", \"ttl_seconds\": \"$lauthTtl\"}" as-value output=user];
+        :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/application_user/$authUser/auth_request" http-content-type="application/json" http-method=post  http-data="{\"action\": \"$lauthTitle\", \"description\": \"$lauthDesc\", \"ttl_seconds\": \"$lauthTtl\", \"fingerprint\": \"$lauthFingerprint\"}" as-value output=user];
 
         :if ($result->"status" != "finished") do={
             :log error "NotakeyFunctions: Notakey auth request creation request failed";
