@@ -45,7 +45,7 @@ from the same device as the VPN is initiated on, e.g. start vpn and approve from
     # Wait for response from mobile
     :if ([$NtkWaitFor uuid=$ntkAuthUuid host=$ntkHost accessId=$ntkAccessId]) do={
         :put "All cool, we are letting you in";
-    }else{
+    } else={
         :put "Auth expired or denied"
     }
 
