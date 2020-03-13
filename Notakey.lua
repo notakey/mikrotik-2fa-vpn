@@ -47,7 +47,7 @@ if (!any $NtkAuthRequest) do={ :global NtkAuthRequest do={
             :set lauthTtl 300;
         }
 
-        :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/application_user/$authUser/auth_request" http-content-type="application/json" http-method=post  http-data="{\"action\": \"$lauthTitle\", \"description\": \"$lauthDesc\", \"ttl_seconds\": \"$lauthTtl\", \"fingerprint\": \"$lauthFingerprint\"}" as-value output=user];
+        :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/application_user/$authUser/auth_request" http-header-field="Content-type: application/json" http-method=post http-data="{\"action\": \"$lauthTitle\", \"description\": \"$lauthDesc\", \"ttl_seconds\": \"$lauthTtl\", \"fingerprint\": \"$lauthFingerprint\"}" as-value output=user];
 
         :if ($result->"status" != "finished") do={
             :log error "NotakeyFunctions: Notakey auth request creation request failed";
@@ -104,7 +104,7 @@ if (!any $NtkWaitFor) do={ :global NtkWaitFor do={
         }
 
         :do {
-            :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/auth_request/$uuid" http-content-type="application/json" http-method=get as-value output=user];
+            :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/auth_request/$uuid" http-header-field="Content-type: application/json" http-method=get as-value output=user];
             :set content ($result->"data");
             :set responseType ([$JSONLoads $content]->"response_type");
             :local requestExpired ([$JSONLoads $content]->"expired");
