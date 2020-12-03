@@ -35,7 +35,7 @@ from the same device as the VPN is initiated on, e.g. start vpn and approve from
     :global NtkUnload;
 
     # Set Notakey Authentication Server params
-    :local ntkHost "demo.notakey.com";
+    :local ntkHost "demoapi.notakey.com";
     :local ntkAccessId "12345645-b32b-4788-a00d-251cd7dc9a03";
     :local ntkUser "demo";
 
@@ -63,12 +63,13 @@ This script can be copied into MikroTik Terminal shell to test the functionality
 * Hosted or on-premises Notakey Authentication Appliance installation
 * iOS or Android device with onboarded service
 * Username in onboarded service must match the one used for VPN authentication
-* Fairly modern RouterOS >= v6.2
+* Fairly modern RouterOS >= v6.46.4
 
 ## Limitations
 
 * Due to limitations of JParseFunctions library, you cannot use parentheses and possibly other special punctuation in authentication requests
 * Currently you also cannot have multiple consecutive spaces in authentication request text fields (action and description)
+
 
 ## Links
 

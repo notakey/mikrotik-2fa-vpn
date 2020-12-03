@@ -46,7 +46,7 @@ if (!any $NtkAuthRequest) do={ :global NtkAuthRequest do={
         :if ([:len $lauthTtl] = 0) do={
             :set lauthTtl 300;
         }
-
+                                      
         :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/application_user/$authUser/auth_request" \
             http-header-field="content-type:application/json" http-method=post \
             http-data="{\"action\": \"$lauthTitle\", \"description\": \"$lauthDesc\", \"ttl_seconds\": \"$lauthTtl\", \"fingerprint\": \"$lauthFingerprint\"}" \
@@ -110,6 +110,7 @@ if (!any $NtkWaitFor) do={ :global NtkWaitFor do={
             :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/auth_request/$uuid" \
                 http-header-field="content-type:application/json" http-method=get \
                 as-value output=user];
+                                                                
             :set content ($result->"data");
             :set responseType ([$JSONLoads $content]->"response_type");
             :local requestExpired ([$JSONLoads $content]->"expired");
