@@ -35,7 +35,7 @@ from the same device as the VPN is initiated on, e.g. start vpn and approve from
     :global NtkUnload;
 
     # Set Notakey Authentication Server params
-    :local ntkHost "demo.notakey.com";
+    :local ntkHost "demoapi.notakey.com";
     :local ntkAccessId "12345645-b32b-4788-a00d-251cd7dc9a03";
     :local ntkUser "demo";
 
@@ -45,7 +45,7 @@ from the same device as the VPN is initiated on, e.g. start vpn and approve from
     # Wait for response from mobile
     :if ([$NtkWaitFor uuid=$ntkAuthUuid host=$ntkHost accessId=$ntkAccessId]) do={
         :put "All cool, we are letting you in";
-    }else{
+    }else={
         :put "Auth expired or denied"
     }
 
