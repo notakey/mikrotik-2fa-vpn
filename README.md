@@ -14,7 +14,7 @@ from the same device as the VPN is initiated on, e.g. start vpn and approve from
 
 * Install NotakeyFunctions library
   - Create NotakeyFunctions script on your MikroTik router (no privilledges required)
-  - Copy contents from Notakey.lua file in this repository into this script
+  - Copy contents from NotakeyFunctions.lua file in this repository into this script
 
 * Enable two factor authentication inside PPP profile that your VPN service uses (usually default-encryption)
   - Copy Up and Down scripts from PppProfileScript.lua into profile
