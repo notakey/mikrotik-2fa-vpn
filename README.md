@@ -10,7 +10,7 @@ from the same device as the VPN is initiated on, e.g. start vpn and approve from
 
 * Install JParseFunctions library
   - Create JParseFunctions script on your MikroTik router (no privilledges required)
-  - Copy contents from (JParseFunctions.lua)[https://github.com/Winand/mikrotik-json-parser/raw/master/JParseFunctions] file into this script
+  - Copy contents from [JParseFunctions.lua](https://github.com/Winand/mikrotik-json-parser/raw/master/JParseFunctions) file into this script
 
 * Install NotakeyFunctions library
   - Create NotakeyFunctions script on your MikroTik router (no privilledges required)
