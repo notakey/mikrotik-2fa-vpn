@@ -30,6 +30,7 @@ if (!any $NtkAuthRequest) do={ :global NtkAuthRequest do={
         :local lauthDesc $authDesc;
         :local lauthTtl $authTtl;
         :local lauthFingerprint $authFingerprint;
+        :local lauthUser;
 
         :if ([:len $lauthDesc] = 0) do={
             :set lauthDesc "Do you wish to proceed with authentication as user $authUser?";
@@ -47,7 +48,30 @@ if (!any $NtkAuthRequest) do={ :global NtkAuthRequest do={
             :set lauthTtl 300;
         }
 
-        :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/application_user/$authUser/auth_request" http-header-field="Content-type: application/json" http-method=post http-data="{\"action\": \"$lauthTitle\", \"description\": \"$lauthDesc\", \"ttl_seconds\": \"$lauthTtl\", \"fingerprint\": \"$lauthFingerprint\"}" as-value output=user];
+        # Urlencode username
+        :for i from=0 to=([:len $authUser] - 1) do={
+            :local char [:pick $authUser $i];
+
+            :if ($char = " ") do={
+                :set $char "%20";
+            }
+
+            :if ($char = "/") do={
+                :set $char "%2F";
+            }
+
+            :if ($char = "@") do={
+                :set $char "%40";
+            }
+
+            :if ($char = ":") do={
+                :set $char "%3A";
+            }
+
+            :set lauthUser ($lauthUser . $char);
+        }
+
+        :local result [/tool fetch mode=https url="https://$host/api/v2/application/$accessId/application_user/$lauthUser/auth_request" http-header-field="Content-type: application/json" http-method=post http-data="{\"action\": \"$lauthTitle\", \"description\": \"$lauthDesc\", \"ttl_seconds\": \"$lauthTtl\", \"fingerprint\": \"$lauthFingerprint\"}" as-value output=user];
 
         :if ($result->"status" != "finished") do={
             :log error "NotakeyFunctions: Notakey auth request creation request failed";
@@ -72,6 +96,7 @@ if (!any $NtkAuthRequest) do={ :global NtkAuthRequest do={
     } on-error={
         :log error "NotakeyFunctions: Notakey Auth request send error";
         :put "ERROR Notakey Auth request send error";
+        :return false;
     }
 }}
 
@@ -95,12 +120,14 @@ if (!any $NtkWaitFor) do={ :global NtkWaitFor do={
             :log error "NotakeyFunctions: JSONLoads empty, have you loaded JParseFunctions?";
             :put "ERROR JSONLoads empty, have you loaded JParseFunctions?";
             :error "ERROR JSONLoads empty, have you loaded JParseFunctions?";
+            :return false;
         }
 
         :if (([:len $host] = 0) || ([:len $uuid] = 0) || ([:len $accessId] = 0)) do={
             :log error "NotakeyFunctions: One or more required params empty, please pass host,accessId,uuid params";
             :put "ERROR One or more required params empty, please pass host,accessId,uuid params";
             :error "ERROR One or more required params empty, please pass host,accessId,uuid params";
+            :return false;
         }
 
         :do {
@@ -141,6 +168,7 @@ if (!any $NtkWaitFor) do={ :global NtkWaitFor do={
     } on-error={
         :log error "NotakeyFunctions: Notakey Authentication procedure not successful";
         :put "ERROR Authentication procedure not successful";
+        :return false;
     }
 }}
 
