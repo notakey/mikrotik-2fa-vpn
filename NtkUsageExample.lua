@@ -22,9 +22,9 @@
     :local ntkAccessId "12345645-b32b-4788-a00d-251cd7dc9a03";
 
     # Custom message in authentication request
-    :local ntkUser "demo";
+    :local authDescMsg "Log in as $user from $callerId\?";
 
-    :local ntkAuthUuid ([$NtkAuthRequest host=$ntkHost accessId=$ntkAccessId authUser=$ntkUser]);
+    :local ntkAuthUuid ([$NtkAuthRequest host=$ntkHost accessId=$ntkAccessId authUser=$user]);
 
     :if ([$NtkWaitFor uuid=$ntkAuthUuid host=$ntkHost accessId=$ntkAccessId]) do={
         :log info "VPN 2FA authentication success for user $user from IP $callerId ($remoteAddr)";
