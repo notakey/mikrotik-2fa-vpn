@@ -24,43 +24,32 @@ from the same device as the VPN is initiated on, e.g. start vpn and approve from
 ## Generic usage example
 ```
 {
-    :local localAddr $"local-address";
-    :local remoteAddr $"remote-address";
-    :local callerId $"caller-id";
-    :local calledId $"called-id";
-
+    # Load dependencies first
     /system script run "JParseFunctions";
     :global JSONUnload;
 
+    # Load Notakey function library
     /system script run "NotakeyFunctions";
     :global NtkAuthRequest;
     :global NtkWaitFor;
     :global NtkUnload;
 
-    :log info "$user (srcIp=$callerId, dstIp=$calledId) connected: was given $remoteAddr IP (GW $localAddr)";
-
-    # Change values below to match your Notakey installation
-    # ntkHost - https hostname of Notakey Authentication Server (NtkAS)
-    :local ntkHost "demoapi.example.com";
-
-    # ntkAccessId - service ID of NtkAS, can be seen in settings
+    # Set Notakey Authentication Server params
+    :local ntkHost "demoapi.notakey.com";
     :local ntkAccessId "12345645-b32b-4788-a00d-251cd7dc9a03";
+    :local ntkUser "demo";
 
-    # Custom message in authentication request
-    :local authDescMsg "Log in as $user from $callerId\?";
+    # Send autehntication request to mobile device
+    :local ntkAuthUuid ([$NtkAuthRequest host=$ntkHost accessId=$ntkAccessId authUser=$ntkUser]);
 
-    :local ntkAuthUuid ([$NtkAuthRequest host=$ntkHost accessId=$ntkAccessId authUser=$user authTitle="VPN connection" authDesc=$authDescMsg authTtl=60]);
-
+    # Wait for response from mobile
     :if ([$NtkWaitFor uuid=$ntkAuthUuid host=$ntkHost accessId=$ntkAccessId]) do={
-        :log info "VPN 2FA authentication success for user $user from IP $callerId ($remoteAddr)";
-        # Removes user IP from 2fa_pending access list (configure access list in PPP profile)
-        /ip firewall address-list remove [/ip firewall address-list find where list=2fa_pending address=$remoteAddr]
-    } else={
-        :log info "VPN 2FA authentication failure for user $user from IP $callerId";
-        # Disconnect active session with this IP and user
-        /ppp active remove [/ppp active find name="$user" address="$remoteAddr"]
+        :put "All cool, we are letting you in";
+    }else={
+        :put "Auth expired or denied"
     }
 
+    # Unload global function references
     $NtkUnload
     $JSONUnload
 }
