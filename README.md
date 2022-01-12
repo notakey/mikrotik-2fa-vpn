@@ -49,7 +49,7 @@ from the same device as the VPN is initiated on, e.g. start vpn and approve from
     # Custom message in authentication request
     :local authDescMsg "Log in as $user from $callerId\?";
 
-    :local ntkAuthUuid ([$NtkAuthRequest host=$ntkHost accessId=$ntkAccessId authUser=$user]);
+    :local ntkAuthUuid ([$NtkAuthRequest host=$ntkHost accessId=$ntkAccessId authUser=$user authTitle="VPN connection" authDesc=$authDescMsg authTtl=60]);
 
     :if ([$NtkWaitFor uuid=$ntkAuthUuid host=$ntkHost accessId=$ntkAccessId]) do={
         :log info "VPN 2FA authentication success for user $user from IP $callerId ($remoteAddr)";
