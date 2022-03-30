@@ -73,6 +73,6 @@ This script can be copied into MikroTik Terminal shell to test the functionality
 
 ## Links
 
-* Documentation [http://docs.notakey.com/]
+* Documentation [https://documentation.notakey.com/]
 * Contact [https://notakey.com/]
 * Support [support@notakey.com]
